@@ -54,8 +54,6 @@ public class FileUploadModule extends ReactContextBaseJavaModule {
         ReadableArray files = options.getArray("files");
         ReadableMap fields = options.getMap("fields");
 
-
-
         HttpURLConnection connection = null;
         DataOutputStream outputStream = null;
         DataInputStream inputStream = null;
@@ -69,7 +67,6 @@ public class FileUploadModule extends ReactContextBaseJavaModule {
         try {
 
             connectURL = new URL(uploadUrl);
-
 
             connection = (HttpURLConnection) connectURL.openConnection();
 
@@ -88,7 +85,8 @@ public class FileUploadModule extends ReactContextBaseJavaModule {
             }
 
 
-
+            String responseCookie = connection.getHeaderField("Set-Cookie");
+            connection.setRequestProperty("Cookie", responseCookie);
             connection.setRequestProperty("Connection", "Keep-Alive");
             connection.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
 
