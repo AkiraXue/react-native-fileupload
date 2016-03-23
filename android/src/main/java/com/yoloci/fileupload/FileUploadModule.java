@@ -84,9 +84,6 @@ public class FileUploadModule extends ReactContextBaseJavaModule {
                 connection.setRequestProperty(key, headers.getString(key));
             }
 
-
-            String responseCookie = connection.getHeaderField("Set-Cookie");
-            connection.setRequestProperty("Cookie", responseCookie);
             connection.setRequestProperty("Connection", "Keep-Alive");
             connection.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
 
